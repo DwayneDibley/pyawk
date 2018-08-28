@@ -1,5 +1,5 @@
 
-# demos directory contents
+# examples directory contents
 Here are examples of some of the basic features of pyawk.
 
 ## pyanalyse: 
