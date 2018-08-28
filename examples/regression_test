@@ -1,0 +1,9 @@
+#!/bin/sh
+#
+#  Project regression test
+#
+# make sire that the latest version of pyawk can be found
+cp ../pyawk.py .
+
+# run pyawk on itself
+python3 pyawk.py -f regression_test.scr regression_test.dat
