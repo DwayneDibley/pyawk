@@ -1,6 +1,7 @@
 # pyawk
 
-This module supplies the base functionality of awk to python programs.
+This module supplies the base functionality of awk to python3 programs, and is an updated version of the earlier pyawk program which was written at the turn of the century
+.
 The name awk comes from the initials of its designers: Alfred V. Aho Peter
 J. Weinberger, and brian W. Hernighan. The original version of awk was
 written in 1977. Since then there have been several versions nawk, gawk
@@ -158,28 +159,4 @@ The following are syntax extensions that do not appear in awk:
 ### INSTALLATION
 At present only the pyawk.py file exists (no installer) so just copy pyawk.py somewhere where the python interpreter will find it, eg /usr/local/lib/python3.?/site-packages.
 
-## Roger Wenham 28/8/2018
-
-
-<br>&nbsp;
-<br>&nbsp;
-<center>
-<p>.
-</td>
-
-<td></td>
-</tr>
-
-<tr>
-<td></td>
-
-<td></td>
-</tr>
-</table>
-<!-- end center table --><!-- footer table -->
-<table BORDER=0 CELLSPACING=0 CELLPADDING=2 WIDTH="100%" BGCOLOR="#737B9C" >
-<tr>
-</table>
-<!-- end footer table -->
-</body>
-</html>
+Roger Wenham 28/8/2018
