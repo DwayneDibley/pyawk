@@ -1,0 +1,308 @@
+#
+# pyawk regression test
+#
+# Log:
+# 16/06/01 -rjw- Initial version
+#
+
+BEGIN {
+print( "---------------------")
+print( "Begin regression test")
+print( "---------------------")
+
+Errors = 0
+if RSTART != 0:
+	print("BEGIN ERROR: RSTART should be 0 was %s" % (RSTART))
+	Errors += 1
+
+if RLENGTH != -1:
+	print("BEGIN ERROR: RLENGTH should be -1 was %s" % (RLENGTH))
+	Errors += 1
+
+if FILENAME != 'regression_test.dat':
+	print('BEGIN ERROR: FILENAME should be "regression_test.dat" was "%s"' % (FILENAME))
+	Errors += 1
+
+if FNR != 0:
+	print('BEGIN ERROR: FNR should be 0 was %d' % (FNR))
+	Errors += 1
+
+if FS != ' ':
+	print('BEGIN ERROR: FS should be " "  was "%s"' % (FS))
+	Errors += 1
+
+if NF != 0:
+	print('BEGIN ERROR: NF should be 0  was "%d"' % (NF))
+	Errors += 1
+
+if NR != 0:
+	print('BEGIN ERROR: NR should be 0  was "%d"' % (NR))
+	Errors += 1
+
+if Errors == 0:
+	print('OK')
+}
+
+/test 1/ {
+print()
+print( "-----------------------------")
+print( "Test 1: check field splitting")
+print( "-----------------------------")
+# Data file contains "test 1 field1 field2 field3 field4"
+
+Errors = 0
+if NF != 6:
+	print("ERROR: NF should be 6 was %s" % (NF))
+	Errors += 1
+if _0 != 'test 1 field1 field2 field3 field4':
+	print('ERROR: _0 should be "test 1 field1 field2 field3 field4" was %s' % (_0))
+	Errors += 1
+if _1 != 'test':
+	print('ERROR: _1 should be "test" was %s' % (_1))
+	Errors += 1
+if _2 != '1':
+	print('ERROR: _2 should be "1" was %s' % (_2))
+	Errors += 1
+if _3 != 'field1':
+	print('ERROR: _3 should be "field1" was %s' % (_3))
+	Errors += 1
+if _4 != 'field2':
+	print('ERROR: _4 should be "field2" was %s' % (_4))
+	Errors += 1
+if _5 != 'field3':
+	print('ERROR: _5 should be "field3" was %s' % (_5))
+	Errors += 1
+if _6 != 'field4':
+	print('ERROR: _6 should be "field4" was %s' % (_6))
+	Errors += 1
+
+if RSTART != 1:
+	print( "ERROR: RSTART should be 1 was %d" % (RSTART))
+	Errors += 1
+
+if RLENGTH != 6:
+	print( "ERROR: RLENGTH should be 6 was %d" % (RLENGTH)) 
+	Errors += 1
+
+if FILENAME != 'regression_test.dat':
+	print( 'ERROR: FILENAME should be "regression_test.dat" was "%s"' % (FILENAME))
+	Errors += 1
+
+if FNR != 1:
+	print( 'ERROR: FNR should be 1 was %d' % (FNR))
+	Errors += 1
+
+if FS != ' ':
+	print( 'ERROR: FS should be " "  was "%s"' % (FS))
+	Errors += 1
+
+if NF != 6:
+	print( 'ERROR: NF should be 6  was "%d"' % (NF))
+	Errors += 1
+
+if NR != 1:
+	print( 'ERROR: NR should be 1  was "%d"' % (NR))
+	Errors += 1
+
+if Errors == 0:
+	print('OK')
+}
+
+/test 2/ {
+print()
+print( "-----------------------------")
+print( "Test 2: check getline()")
+print( "-----------------------------")
+getline() 	# The next line contains "the data for test 2"
+
+Errors = 0
+if NF != 4:
+	print( "ERROR: NF should be 4 was %s" % (NF))
+	Errors += 1
+if _0 != 'data for test 2':
+	print( 'ERROR: _0 should be "data for test 2" was %s' % (_0))
+	Errors += 1
+if _1 != 'data':
+	print( 'ERROR: _1 should be "data" was %s' % (_1))
+	Errors += 1
+if _2 != 'for':
+	print( 'ERROR: _2 should be "for" was %s' % (_2))
+	Errors += 1
+if _3 != 'test':
+	print( 'ERROR: _3 should be "test" was %s' % (_3))
+	Errors += 1
+if _4 != '2':
+	print( 'ERROR: _4 should be "2" was %s' % (_4))
+	Errors += 1
+
+if RSTART != 1:
+	print( "ERROR: RSTART should be 1 was %d" % (RSTART))
+	Errors += 1
+
+if RLENGTH != 6:
+	print( "ERROR: RLENGTH should be 6 was %d" % (RLENGTH)) 
+	Errors += 1
+
+if FILENAME != 'regression_test.dat':
+	print( 'ERROR: FILENAME should be "regression_test.dat" was "%s"' % (FILENAME))
+	Errors += 1
+
+if FNR != 3:
+	print( 'ERROR: FNR should be 3 was %d' % (FNR))
+	Errors += 1
+
+if FS != ' ':
+	print( 'ERROR: FS should be " "  was "%s"' % (FS))
+	Errors += 1
+
+if NF != 4:
+	print( 'ERROR: NF should be 4  was %d' % (NF))
+	Errors += 1
+
+if NR != 3:
+	print( 'ERROR: NR should be 3  was %d' % (NR))
+	Errors += 1
+
+if Errors == 0:
+	print('OK')
+}
+
+/test 3/ {
+print()
+print( "-----------------------------")
+print( "Test 3: check getline(string)")
+print( "-----------------------------")
+
+Errors = 0
+TestString = "this is a string for testing"
+getline(TestString) 
+if NF != 6:
+	print( "ERROR: NF should be 6 was %s" % (NF))
+	Errors += 1
+if _0 != TestString:
+	print( 'ERROR: _0 should be "%s" was "%s"' % (TestString, _0))
+	Errors += 1
+if _1 != 'this':
+	print( 'ERROR: _1 should be "this" was %s' % (_1))
+	Errors += 1
+if _2 != 'is':
+	print( 'ERROR: _2 should be "is" was %s' % (_2))
+	Errors += 1
+if _3 != 'a':
+	print( 'ERROR: _3 should be "a" was %s' % (_3))
+	Errors += 1
+if _4 != 'string':
+	print( 'ERROR: _4 should be "string" was %s' % (_4))
+	Errors += 1
+if _5 != 'for':
+	print( 'ERROR: _3 should be "for" was %s' % (_5))
+	Errors += 1
+if _6 != 'testing':
+	print( 'ERROR: _4 should be "testing" was %s' % (_6))
+	Errors += 1
+
+if RSTART != 1:
+	print( "ERROR: RSTART should be 1 was %d" % (RSTART))
+	Errors += 1
+
+if RLENGTH != 6:
+	print( "ERROR: RLENGTH should be 6 was %d" % (RLENGTH)) 
+	Errors += 1
+
+if FILENAME != 'regression_test.dat':
+	print( 'ERROR: FILENAME should be "regression_test.dat" was "%s"' % (FILENAME))
+	Errors += 1
+
+if FNR != 4:
+	print( 'ERROR: FNR should be 4 was %d' % (FNR))
+	Errors += 1
+
+if FS != ' ':
+	print( 'ERROR: FS should be " "  was "%s"' % (FS))
+	Errors += 1
+
+if NF != 6:
+	print( 'ERROR: NF should be 6  was %d' % (NF))
+	Errors += 1
+
+if NR != 4:
+	print( 'ERROR: NR should be 4  was %d' % (NR))
+	Errors += 1
+
+if Errors == 0:
+	print('OK')
+}
+
+/test 4/ {
+print()
+print( "-----------------------------")
+print( "Test 4: check getline(file)")
+print( "-----------------------------")
+
+Errors = 0
+Fp = open('regression_test.dat')
+getline(Fp) 
+Fp.close()
+if NF != 6:
+	print( "ERROR: NF should be 6 was %s" % (NF))
+	Errors += 1
+if _0 != "test 1 field1 field2 field3 field4":
+	print( 'ERROR: _0 should be "test 1 field1 field2 field3 field4" was "%s"' % (_0))
+	Errors += 1
+if _1 != 'test':
+	print( 'ERROR: _1 should be "test" was %s' % (_1))
+	Errors += 1
+if _2 != '1':
+	print( 'ERROR: _2 should be "1" was %s' % (_2))
+	Errors += 1
+if _3 != 'field1':
+	print( 'ERROR: _3 should be "field1" was %s' % (_3))
+	Errors += 1
+if _4 != 'field2':
+	print( 'ERROR: _4 should be "field2" was %s' % (_4))
+	Errors += 1
+if _5 != 'field3':
+	print( 'ERROR: _3 should be "field3" was %s' % (_5))
+	Errors += 1
+if _6 != 'field4':
+	print( 'ERROR: _4 should be "field4" was %s' % (_6))
+	Errors += 1
+
+if RSTART != 1:
+	print( "ERROR: RSTART should be 1 was %d" % (RSTART))
+	Errors += 1
+
+if RLENGTH != 6:
+	print( "ERROR: RLENGTH should be 6 was %d" % (RLENGTH)) 
+	Errors += 1
+
+if FILENAME != 'regression_test.dat':
+	print( 'ERROR: FILENAME should be "regression_test.dat" was "%s"' % (FILENAME))
+	Errors += 1
+
+if FNR != 5:
+	print( 'ERROR: FNR should be 4 was %d' % (FNR))
+	Errors += 1
+
+if FS != ' ':
+	print( 'ERROR: FS should be " "  was "%s"' % (FS))
+	Errors += 1
+
+if NF != 6:
+	print( 'ERROR: NF should be 6  was %d' % (NF))
+	Errors += 1
+
+if NR != 5:
+	print( 'ERROR: NR should be 4  was %d' % (NR))
+	Errors += 1
+
+if Errors == 0:
+	print('OK')
+}
+
+END {
+print()
+print( "-----------")
+print( "End of test")
+print( "-----------")
+}
