@@ -1,0 +1,82 @@
+#
+# Analysis of a python module
+#
+
+BEGIN {
+print("----------------------------")
+print("Analysis of %s" % (FILENAME))
+print("----------------------------")
+print()
+
+functions = []		# functions defined in the file
+classes   = {}		# classes the file defines
+imports   = []		# Which modules are imported
+currclass = None	# Remeber which class we are currently analysing
+
+}
+
+# lines with def at the start of the line must be function definitions
+/^def/ {
+functions.append(_0)
+next()		# Continue to the next line in the sorce file
+}
+
+# lines with class at the start must be class definitions
+/^class/ {
+classes[_2] = [] 
+currclass = _2
+next()
+}
+
+# lines with whitespace followed by def must be class methods
+/^[ \t]*def/ {
+classes[currclass].append(_0)
+next()
+}
+
+# imports...
+/^import/ {
+for m in _:
+	if m == '' or m.startswith('import'):
+		continue
+	elif m[0] == '#':
+		break
+	else:
+		imports.append(m)
+}
+
+
+END {
+print("IMPORTED MODULES")
+imports.sort()
+for m in imports:
+	if m == '':
+		continue
+	if m[-1] == ',':
+		m = m[:-1]
+	if m == ',':
+		continue
+	print('\t', m)
+print()
+
+print("FUNCTIONS")
+fs = functions
+fs.sort()
+for f in fs:
+	print('\t', f)
+print()
+print("CLASSES")
+cl = list(classes.keys())
+cl.sort()
+for c in cl:
+	print(c)
+	mt = classes[c]
+	mt.sort()
+	for m in mt:
+		print(m)
+	print()
+print()
+
+
+
+}
