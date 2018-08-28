@@ -1,7 +1,7 @@
 # pyawk
 
-This module supplies the base functionality of awk to python3 programs, and is an updated version of the earlier pyawk program which was written at the turn of the century
-.
+This module supplies the base functionality of awk to python3 programs, and is an updated version of the earlier pyawk program which was written at the turn of the century.
+
 The name awk comes from the initials of its designers: Alfred V. Aho Peter
 J. Weinberger, and brian W. Hernighan. The original version of awk was
 written in 1977. Since then there have been several versions nawk, gawk
