@@ -15,18 +15,18 @@ are python regular expressions as parsed by the re module.&nbsp;
 This module can be used in the many ways that awk can:
 
 * Extract information from text files.
-* Generate reports&nbsp;</li>
+* Generate reports.
 * Perform documentation preparation tasks. etc, etc
 
 The pyawk module can be used in three ways:
 
 - For normal awk like processing:
   ```
-  python pyawk.py -f script data
+  python pyawk.py -f script input_file
   ```
 - Called as a function:
   ```
-  pyawk.pyawk(scriptfile,&nbsp; datafile, ';')
+  pyawk.pyawk(scriptfile, input_file, ';')
   ```
 - Embedded in an application as an object:
   ```
